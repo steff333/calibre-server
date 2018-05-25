@@ -18,7 +18,6 @@ This container exposes the volume **/opt/calibre/server** and the port **8080**
 
 To allow calibre to run **your library** you have to **mount it as a volume** with ``-v /your/library/location:/opt/calibre/library``
 
-
 Running the container
 ------------------------
 
@@ -35,9 +34,14 @@ You can pass arguments to calibre-server:
 Restricting access to the serivce
 ------------------------
 
-It is possible to restrict access to the server to authorized users only. To do so you must define the user and their rights in the desktop application under 
-   Preferences -> sharing of the net.
+It is possible to restrict access to the server to authorized users only. 
+To do so, you must define users and their rights in the desktop application  
+
+see Calibre -> Preferences -> sharing of the net.
+
 As a result a SQLite-database file is created in your calibre home directory (e.g. ~/.config/calibre/server-users.sqlite). 
-To use this file, mount the folder with your database file as well and start the container with 
+
+To use this file, mount the folder with your database file as well and enable authentication with this file 
+    
     docker run -p 80:8080 -v /media/calibre/books:/opt/calibre/library -v ~/.config/calibre:/opt/calibre/config --name calibre-server 9z3eu/calibre-server --userdb /opt/calibre/config/server-users.sqlite --enable-auth
 
