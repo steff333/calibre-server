@@ -8,7 +8,10 @@ RUN apt-get update -y \
 
 EXPOSE 8080
 
-RUN mkdir /opt/calibre && mkdir /opt/calibre/library
+RUN mkdir /opt/calibre && mkdir /opt/calibre/library && mkdir /opt/calibre/config
 
-VOLUME        ["/opt/calibre/library"]
+VOLUME ["/opt/calibre/library"]
+VOLUME ["/opt/calibre/config"]
+
 ENTRYPOINT ["/usr/bin/calibre-server", "/opt/calibre/library"]
+

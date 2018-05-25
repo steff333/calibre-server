@@ -28,8 +28,16 @@ From now on:
 
     docker start calibre
 
-
 You can pass arguments to calibre-server:
 
-    docker run -p 80:8080 -v /media/calibre/books:/opt/calibre/library -name calibre 9z3eu/calibre-server --username user --password pass
+    docker run -p 80:8080 -v /media/calibre/books:/opt/calibre/library -name calibre 9z3eu/calibre-server --shutdown-timeout=300
+
+Restricting access to the serivce
+------------------------
+
+It is possible to restrict access to the server to authorized users only. To do so you must define the user and their rights in the desktop application under 
+   Preferences -> sharing of the net.
+As a result a SQLite-database file is created in your calibre home directory (e.g. ~/.config/calibre/server-users.sqlite). 
+To use this file, mount the folder with your database file as well and start the container with 
+    docker run -p 80:8080 -v /media/calibre/books:/opt/calibre/library -v ~/.config/calibre:/opt/calibre/config --name calibre-server 9z3eu/calibre-server --userdb /opt/calibre/config/server-users.sqlite --enable-auth
 
